@@ -3,25 +3,25 @@ function Plots(id) {
 // The data from the JSON file is arbitrarily named importedData as the argument
 d3.json("static/samples.json").then((data)=>{
     console.log(data);
-    var individual = data.samples[0]
-
+    var individual = data.samples.filter(d => d.id.toString() === id)[0];
+    console.log(individual)
     var ids = individual.otu_ids;
-    console.log(ids)
+    // console.log(ids)
 
     var values = individual.sample_values;
 
     //take top 10 largest sample values and reverse for bar chart
     var sample_values = individual.sample_values.slice(0,10).reverse();
-    console.log(sample_values)
+    // console.log(sample_values)
 
     //top 10 labels and reverse for bar chart
     var labels = individual.otu_labels.slice(0,10).reverse();
-    console.log(labels)
+    // console.log(labels)
     
     //take top 10 otu_ids reverse to match sample values and bar chart
     var top_10_otu = (ids.slice(0,10)).reverse();
     var top_otu_id = top_10_otu.map(d => "OTU " + d);
-    console.log(top_otu_id)
+    // console.log(top_otu_id)
 
     //create a trace for the bar chart
     var trace1 = {
